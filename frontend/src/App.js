@@ -14,6 +14,8 @@ const Chat = () => {
 
     ws.onmessage = (event) => {
       setMessages((prevMessages) => [...prevMessages, event.data]);
+      const elapsed = performance.now() - window.sendTimestamp;
+      console.log(`Time from js client -> rust server -> js clients: ${elapsed.toFixed(2)} ms`);
     };
 
     return () => {
@@ -28,6 +30,8 @@ const Chat = () => {
       const formattedInput = "You: " + input;
       setMessages((prevMessages) => [...prevMessages, formattedInput]);
       setInput('');
+      // Record the timestamp
+      window.sendTimestamp = performance.now();
     }
   };
 
