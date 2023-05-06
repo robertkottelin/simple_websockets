@@ -25,7 +25,8 @@ const Chat = () => {
     e.preventDefault();
     if (input.trim() !== '') {
       socket.send(input);
-      setMessages((prevMessages) => [...prevMessages, input]);
+      const formattedInput = "You: " + input;
+      setMessages((prevMessages) => [...prevMessages, formattedInput]);
       setInput('');
     }
   };
